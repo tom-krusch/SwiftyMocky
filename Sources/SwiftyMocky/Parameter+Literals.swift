@@ -2,29 +2,6 @@ import Foundation
 
 // MARK: - ExpressibleByStringLiteral
 
-extension Optional:
-    ExpressibleByStringLiteral,
-    ExpressibleByExtendedGraphemeClusterLiteral,
-    ExpressibleByUnicodeScalarLiteral
-    where Wrapped: ExpressibleByStringLiteral
-{
-    public typealias StringLiteralType = Wrapped.StringLiteralType
-    public typealias ExtendedGraphemeClusterLiteralType = Wrapped.ExtendedGraphemeClusterLiteralType
-    public typealias UnicodeScalarLiteralType = Wrapped.UnicodeScalarLiteralType
-
-    public init(stringLiteral value: StringLiteralType) {
-        self = .some(Wrapped.init(stringLiteral: value))
-    }
-
-    public init(extendedGraphemeClusterLiteral value: ExtendedGraphemeClusterLiteralType) {
-        self = .some(Wrapped.init(extendedGraphemeClusterLiteral: value))
-    }
-
-    public init(unicodeScalarLiteral value: UnicodeScalarLiteralType) {
-        self = .some(Wrapped.init(unicodeScalarLiteral: value))
-    }
-}
-
 extension Parameter:
     ExpressibleByStringLiteral,
     ExpressibleByExtendedGraphemeClusterLiteral,
@@ -58,14 +35,6 @@ extension Parameter: ExpressibleByNilLiteral where ValueType: ExpressibleByNilLi
 
 // MARK: - ExpressibleByIntegerLiteral
 
-extension Optional: ExpressibleByIntegerLiteral where Wrapped: ExpressibleByIntegerLiteral {
-    public typealias IntegerLiteralType = Wrapped.IntegerLiteralType
-
-    public init(integerLiteral value: IntegerLiteralType) {
-        self = .some(Wrapped.init(integerLiteral: value))
-    }
-}
-
 extension Parameter: ExpressibleByIntegerLiteral where ValueType: ExpressibleByIntegerLiteral {
     public typealias IntegerLiteralType = ValueType.IntegerLiteralType
 
@@ -76,14 +45,6 @@ extension Parameter: ExpressibleByIntegerLiteral where ValueType: ExpressibleByI
 
 // MARK: - ExpressibleByBooleanLiteral
 
-extension Optional: ExpressibleByBooleanLiteral where Wrapped: ExpressibleByBooleanLiteral {
-    public typealias BooleanLiteralType = Wrapped.BooleanLiteralType
-
-    public init(booleanLiteral value: BooleanLiteralType) {
-        self = .some(Wrapped.init(booleanLiteral: value))
-    }
-}
-
 extension Parameter: ExpressibleByBooleanLiteral where ValueType: ExpressibleByBooleanLiteral {
     public typealias BooleanLiteralType = ValueType.BooleanLiteralType
 
@@ -93,14 +54,6 @@ extension Parameter: ExpressibleByBooleanLiteral where ValueType: ExpressibleByB
 }
 
 // MARK: - ExpressibleByFloatLiteral
-
-extension Optional: ExpressibleByFloatLiteral where Wrapped: ExpressibleByFloatLiteral {
-    public typealias FloatLiteralType = Wrapped.FloatLiteralType
-
-    public init(floatLiteral value: FloatLiteralType) {
-        self = .some(Wrapped.init(floatLiteral: value))
-    }
-}
 
 extension Parameter: ExpressibleByFloatLiteral where ValueType: ExpressibleByFloatLiteral {
     public typealias FloatLiteralType = ValueType.FloatLiteralType
@@ -126,14 +79,6 @@ private extension ExpressibleByArrayLiteral where ArrayLiteralElement: Hashable 
     }
 }
 
-extension Optional: ExpressibleByArrayLiteral where Wrapped: ExpressibleByArrayLiteral {
-    public typealias ArrayLiteralElement = Wrapped.ArrayLiteralElement
-
-    public init(arrayLiteral elements: ArrayLiteralElement...) {
-        self = .some(Wrapped.init(elements))
-    }
-}
-
 extension Parameter: ExpressibleByArrayLiteral where ValueType: ExpressibleByArrayLiteral {
     public typealias ArrayLiteralElement = ValueType.ArrayLiteralElement
 
@@ -148,15 +93,6 @@ private extension ExpressibleByDictionaryLiteral where Key: Hashable {
     init(_ elements: [(Key, Value)]) {
         let value: [Key: Value] = Dictionary.init(uniqueKeysWithValues: elements)
         self = value as! Self  // TODO: Check if can be fixed. For some reason could not use init(arayLiteral elements: ...)
-    }
-}
-
-extension Optional: ExpressibleByDictionaryLiteral where Wrapped: ExpressibleByDictionaryLiteral, Wrapped.Key: Hashable {
-    public typealias Key = Wrapped.Key
-    public typealias Value = Wrapped.Value
-
-    public init(dictionaryLiteral elements: (Key, Value)...) {
-        self = .some(Wrapped.init(elements))
     }
 }
 
