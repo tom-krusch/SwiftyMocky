@@ -154,7 +154,7 @@ class SimpleSequencingTests: XCTestCase {
 
         Given(mock, .simpleMehtodThatReturns(optionalParam: .any, willReturn: nil), .wrap)
         Given(mock, .simpleMehtodThatReturns(optionalParam: nil, willReturn: "a","b"), .drop)
-        Given(mock, .simpleMehtodThatReturns(optionalParam: "z", willReturn: "z","z","z"), .drop)
+        Given(mock, .simpleMehtodThatReturns(optionalParam: .value("z"), willReturn: "z","z","z"), .drop)
 
         XCTAssertEqual(mock.simpleMehtodThatReturns(optionalParam: nil), "a")
         XCTAssertEqual(mock.simpleMehtodThatReturns(optionalParam: "q"), nil)
@@ -171,7 +171,7 @@ class SimpleSequencingTests: XCTestCase {
     func test_mixed_policy_when_inverted() {
         let mock = SimpleProtocolWithMethodsMock(sequencing: .inWritingOrder)
 
-        Given(mock, .simpleMehtodThatReturns(optionalParam: "z", willReturn: "z","z","z"), .drop)
+        Given(mock, .simpleMehtodThatReturns(optionalParam: .value("z"), willReturn: "z","z","z"), .drop)
         Given(mock, .simpleMehtodThatReturns(optionalParam: nil, willReturn: "a","b"), .drop)
         Given(mock, .simpleMehtodThatReturns(optionalParam: .any, willReturn: nil), .wrap)
 

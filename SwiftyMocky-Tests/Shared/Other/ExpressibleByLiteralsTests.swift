@@ -49,8 +49,8 @@ class ExpressibleByLiteralsTests: XCTestCase {
 
         // Optional
         Given(mock, .methodWithOtionalStringParameter(p: .any, willReturn: 0))
-        Given(mock, .methodWithOtionalStringParameter(p: "a", willReturn: 1))
-        Given(mock, .methodWithOtionalStringParameter(p: "b", willReturn: 2))
+        Given(mock, .methodWithOtionalStringParameter(p: .value("a"), willReturn: 1))
+        Given(mock, .methodWithOtionalStringParameter(p: .value("b"), willReturn: 2))
         Given(mock, .methodWithOtionalStringParameter(p: nil, willReturn: 3))
 
         XCTAssertEqual(mock.methodWithOtionalStringParameter(p: "a"), 1)
@@ -58,11 +58,11 @@ class ExpressibleByLiteralsTests: XCTestCase {
         XCTAssertEqual(mock.methodWithOtionalStringParameter(p: "c"), 0)
         XCTAssertEqual(mock.methodWithOtionalStringParameter(p: nil), 3)
 
-        Verify(mock, .methodWithOtionalStringParameter(p: "a"))
-        Verify(mock, .methodWithOtionalStringParameter(p: "b"))
-        Verify(mock, .methodWithOtionalStringParameter(p: "c"))
+        Verify(mock, .methodWithOtionalStringParameter(p: .value("a")))
+        Verify(mock, .methodWithOtionalStringParameter(p: .value("b")))
+        Verify(mock, .methodWithOtionalStringParameter(p: .value("c")))
         Verify(mock, .methodWithOtionalStringParameter(p: nil))
-        Verify(mock, .never, .methodWithOtionalStringParameter(p: "d"))
+        Verify(mock, .never, .methodWithOtionalStringParameter(p: .value("d")))
         Verify(mock, 4, .methodWithOtionalStringParameter(p: .any))
 
         // Custom
@@ -83,8 +83,8 @@ class ExpressibleByLiteralsTests: XCTestCase {
 
         // Custom Optional
         Given(mock, .methodWithCustomOptionalStringParameter(p: .any, willReturn: 0))
-        Given(mock, .methodWithCustomOptionalStringParameter(p: "a", willReturn: 1))
-        Given(mock, .methodWithCustomOptionalStringParameter(p: "b", willReturn: 2))
+        Given(mock, .methodWithCustomOptionalStringParameter(p: .value("a"), willReturn: 1))
+        Given(mock, .methodWithCustomOptionalStringParameter(p: .value("b"), willReturn: 2))
         Given(mock, .methodWithCustomOptionalStringParameter(p: nil, willReturn: 3))
 
         XCTAssertEqual(mock.methodWithCustomOptionalStringParameter(p: CustomString.a), 1)
@@ -93,11 +93,11 @@ class ExpressibleByLiteralsTests: XCTestCase {
         XCTAssertEqual(mock.methodWithCustomOptionalStringParameter(p: nil), 3)
 
         Verify(mock, 1, .methodWithCustomOptionalStringParameter(p: .value(CustomString.a)))
-        Verify(mock, 1, .methodWithCustomOptionalStringParameter(p: "a"))
-        Verify(mock, .methodWithCustomOptionalStringParameter(p: "b"))
-        Verify(mock, .methodWithCustomOptionalStringParameter(p: "c"))
+        Verify(mock, 1, .methodWithCustomOptionalStringParameter(p: .value("a")))
+        Verify(mock, .methodWithCustomOptionalStringParameter(p: .value("b")))
+        Verify(mock, .methodWithCustomOptionalStringParameter(p: .value("c")))
         Verify(mock, .methodWithCustomOptionalStringParameter(p: nil))
-        Verify(mock, .never, .methodWithCustomOptionalStringParameter(p: "d"))
+        Verify(mock, .never, .methodWithCustomOptionalStringParameter(p: .value("d")))
 
         Verify(mock, 4, .methodWithCustomOptionalStringParameter(p: .any))
     }
@@ -121,8 +121,8 @@ class ExpressibleByLiteralsTests: XCTestCase {
 
         // Custom Optional
         Given(mock, .methodWithCustomOptionalIntParameter(p: .any, willReturn: 0))
-        Given(mock, .methodWithCustomOptionalIntParameter(p: 1, willReturn: 1))
-        Given(mock, .methodWithCustomOptionalIntParameter(p: 2, willReturn: 2))
+        Given(mock, .methodWithCustomOptionalIntParameter(p: .value(1), willReturn: 1))
+        Given(mock, .methodWithCustomOptionalIntParameter(p: .value(2), willReturn: 2))
         Given(mock, .methodWithCustomOptionalIntParameter(p: nil, willReturn: 3))
 
         XCTAssertEqual(mock.methodWithCustomOptionalIntParameter(p: CustomInt.value(1)), 1)
@@ -131,9 +131,9 @@ class ExpressibleByLiteralsTests: XCTestCase {
         XCTAssertEqual(mock.methodWithCustomOptionalIntParameter(p: nil), 3)
 
         Verify(mock, 1, .methodWithCustomOptionalIntParameter(p: .value(CustomInt.zero)))
-        Verify(mock, 1, .methodWithCustomOptionalIntParameter(p: 1))
-        Verify(mock, .methodWithCustomOptionalIntParameter(p: 2))
-        Verify(mock, .methodWithCustomOptionalIntParameter(p: 0))
+        Verify(mock, 1, .methodWithCustomOptionalIntParameter(p: .value(1)))
+        Verify(mock, .methodWithCustomOptionalIntParameter(p: .value(2)))
+        Verify(mock, .methodWithCustomOptionalIntParameter(p: .value(0)))
         Verify(mock, .methodWithCustomOptionalIntParameter(p: nil))
         Verify(mock, .never, .methodWithCustomOptionalIntParameter(p: .value(CustomInt.value(15))))
 
@@ -145,8 +145,8 @@ class ExpressibleByLiteralsTests: XCTestCase {
 
         Given(mock, .methodWithBool(p: .any, willReturn: 0))
         Given(mock, .methodWithBool(p: nil, willReturn: -1))
-        Given(mock, .methodWithBool(p: true, willReturn: 2))
-        Given(mock, .methodWithBool(p: false, willReturn: 1))
+        Given(mock, .methodWithBool(p: .value(true), willReturn: 2))
+        Given(mock, .methodWithBool(p: .value(false), willReturn: 1))
 
         XCTAssertEqual(mock.methodWithBool(p: nil), -1)
         XCTAssertEqual(mock.methodWithBool(p: true), 2)
@@ -154,8 +154,8 @@ class ExpressibleByLiteralsTests: XCTestCase {
 
         Verify(mock, 1, .methodWithBool(p: nil))
         Verify(mock, 1, .methodWithBool(p: .value(nil)))
-        Verify(mock, 1, .methodWithBool(p: true))
-        Verify(mock, 1, .methodWithBool(p: false))
+        Verify(mock, 1, .methodWithBool(p: .value(true)))
+        Verify(mock, 1, .methodWithBool(p: .value(false)))
         Verify(mock, 3, .methodWithBool(p: .any))
         Verify(mock, 2, .methodWithBool(p: .notNil))
     }
@@ -165,8 +165,8 @@ class ExpressibleByLiteralsTests: XCTestCase {
 
         Given(mock, .methodWithFloat(p: .any, willReturn: 0))
         Given(mock, .methodWithFloat(p: nil, willReturn: -1))
-        Given(mock, .methodWithFloat(p: 1.0, willReturn: 1))
-        Given(mock, .methodWithFloat(p: 2, willReturn: 2))
+        Given(mock, .methodWithFloat(p: .value(1.0), willReturn: 1))
+        Given(mock, .methodWithFloat(p: .value(2), willReturn: 2))
 
         XCTAssertEqual(mock.methodWithFloat(p: nil), -1)
         XCTAssertEqual(mock.methodWithFloat(p: 1.0000001), 0)
@@ -177,8 +177,8 @@ class ExpressibleByLiteralsTests: XCTestCase {
 
         Given(mock, .methodWithDouble(p: .any, willReturn: 0))
         Given(mock, .methodWithDouble(p: nil, willReturn: -1))
-        Given(mock, .methodWithDouble(p: 1.0, willReturn: 1))
-        Given(mock, .methodWithDouble(p: 2, willReturn: 2))
+        Given(mock, .methodWithDouble(p: .value(1.0), willReturn: 1))
+        Given(mock, .methodWithDouble(p: .value(2), willReturn: 2))
 
         XCTAssertEqual(mock.methodWithDouble(p: nil), -1)
         XCTAssertEqual(mock.methodWithDouble(p: 1.0000001), 0)
@@ -224,8 +224,8 @@ class ExpressibleByLiteralsTests: XCTestCase {
         Verify(mock, .once, .methodWithSetOfInt(p: [2,3,4]))
 
         Given(mock, .methodWithOptionalSetOfInt(p: .any, willReturn: 0))
-        Given(mock, .methodWithOptionalSetOfInt(p: [0,1,2], willReturn: 1))
-        Given(mock, .methodWithOptionalSetOfInt(p: [2,3,4], willReturn: 2))
+        Given(mock, .methodWithOptionalSetOfInt(p: .value([0,1,2]), willReturn: 1))
+        Given(mock, .methodWithOptionalSetOfInt(p: .value([2,3,4]), willReturn: 2))
         Given(mock, .methodWithOptionalSetOfInt(p: nil, willReturn: 3))
 
         XCTAssertEqual(mock.methodWithOptionalSetOfInt(p: [0,1]), 0)
@@ -234,9 +234,9 @@ class ExpressibleByLiteralsTests: XCTestCase {
         XCTAssertEqual(mock.methodWithOptionalSetOfInt(p: nil), 3)
 
         Verify(mock, 4, .methodWithOptionalSetOfInt(p: .any))
-        Verify(mock, .once, .methodWithOptionalSetOfInt(p: [0,1]))
-        Verify(mock, .once, .methodWithOptionalSetOfInt(p: [0,1,2]))
-        Verify(mock, .once, .methodWithOptionalSetOfInt(p: [2,3,4]))
+        Verify(mock, .once, .methodWithOptionalSetOfInt(p: .value([0,1])))
+        Verify(mock, .once, .methodWithOptionalSetOfInt(p: .value([0,1,2])))
+        Verify(mock, .once, .methodWithOptionalSetOfInt(p: .value([2,3,4])))
         Verify(mock, .once, .methodWithOptionalSetOfInt(p: nil))
     }
 
