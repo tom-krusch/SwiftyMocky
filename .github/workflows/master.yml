@@ -8,14 +8,14 @@ on:
       - master
 jobs:
   SwiftyMocky-Tests:
-    runs-on: macos-11
+    runs-on: macos-latest
     steps:
       - name: Check out repository code
         uses: actions/checkout@v2
       - name: Set Xcode version
         uses: maxim-lobanov/setup-xcode@v1
         with:
-          xcode-version: '13.2.1'
+          xcode-version: '15.4'
       - name: Prepare for tests
         run: |
           rake pods
