@@ -1,5 +1,4 @@
 import Foundation
-import Chalk
 import PathKit
 
 public struct ProjectPathOption: RawRepresentable, SelectableOption {
@@ -10,7 +9,7 @@ public struct ProjectPathOption: RawRepresentable, SelectableOption {
     public var rawValue: String
     public var title: String {
         if rawValue == ProjectPathOption.projects.first?.string {
-            let formatted = ck.underline.on("\(Path(rawValue).lastComponentWithoutExtension)")
+            let formatted = "\(Path(rawValue).lastComponentWithoutExtension)"
             return "\(formatted)"
         }
         return Path(rawValue).lastComponentWithoutExtension

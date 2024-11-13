@@ -11,15 +11,6 @@
         }
       },
       {
-        "package": "Chalk",
-        "repositoryURL": "https://github.com/luoxiu/Chalk",
-        "state": {
-          "branch": null,
-          "revision": "8a9d3373bd754fb62f7881d9f639d376f5e4d5a5",
-          "version": "0.2.1"
-        }
-      },
-      {
         "package": "Commander",
         "repositoryURL": "https://github.com/kylef/Commander",
         "state": {
@@ -35,15 +26,6 @@
           "branch": null,
           "revision": "3bfd2737b700b9a36565a8c94f4ad2b050a5e574",
           "version": "1.0.1"
-        }
-      },
-      {
-        "package": "Rainbow",
-        "repositoryURL": "https://github.com/luoxiu/Rainbow",
-        "state": {
-          "branch": null,
-          "revision": "9d8fcb4c64e816a135c31162a0c319e9f1f09c35",
-          "version": "0.1.1"
         }
       },
       {

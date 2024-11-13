@@ -1,5 +1,4 @@
 import Foundation
-import Chalk
 
 public enum Message {
     public static var indentString = "  "
@@ -40,45 +39,45 @@ public enum Message {
     public static func header(_ message: String) {
         empty()
         count += 1
-        let styled = ck.bold.on("\(count). \(message)")
+        let styled = "\(count). \(message)"
         just("\(styled)")
     }
 
     public static func subheader(_ message: String) {
-        let styled = ck.bold.on(message)
+        let styled = message
         just("\(styled)")
     }
 
     public static func actionHeader(_ message: String) {
-        let styled = ck.bold.bg(RainbowColor.Material.green900).whiteBright.on(message)
+        let styled = message
         just("\(styled)")
     }
 
     public static func infoPoint(_ message: String) {
-        let styled = ck.bold.on(" -> \(message)")
+        let styled = message
         just("\(styled)")
     }
 
     public static func success(_ message: String) {
-        just("✅  \(ck.greenBright.on(message))")
+        just("✅  \(message)")
     }
 
     public static func ok(_ message: String) {
-        let styled = ck.greenBright.on(" +  \(message)")
+        let styled = " +  \(message)"
         just("\(styled)")
     }
 
     public static func nok(_ message: String) {
-        let styled = ck.red.on(" -  \(message)")
+        let styled = " -  \(message)"
         just("\(styled)")
     }
 
     public static func failure(_ message: String) {
-        just("❌  \(ck.bold.red.on(message))")
+        just("❌  \(message)")
     }
 
     public static func warning(_ message: String) {
-        just("⚠️  \(ck.bold.yellow.on(message))")
+        just("⚠️  \(message)")
     }
 
     public static func resolutions(_ messages: String..., title: String = "Possible solutions:") {
@@ -87,25 +86,25 @@ public enum Message {
 
     public static func resolutions(array messages: [String], title: String = "Possible solutions:") {
         indent()
-        just("\(ck.underline.gray.on(title))")
+        just("\(title)")
         messages.forEach {
-            let styled = ck.gray.on(" - \($0)")
+            let styled = " - \($0)"
             just("\(styled)")
         }
         unindent()
     }
 
     public static func hint(_ message: String) {
-        just("\(ck.underline.gray.on(message))")
+        just("\(message)")
     }
 
     // MARK: - Misc
 
     public static func swiftyMockyLabel(_ message: String) {
         let bar = String(repeating: "═", count: message.count + 2)
-        print(ck.bold.on("╔\(bar)╗"))
-        print(ck.bold.on("║ \(message) ║"))
-        print(ck.bold.on("╚\(bar)╝"))
+        print("╔\(bar)╗")
+        print("║ \(message) ║")
+        print("╚\(bar)╝")
         print("")
     }
 }
